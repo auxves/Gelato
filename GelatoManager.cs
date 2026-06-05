@@ -583,7 +583,7 @@ public sealed class GelatoManager(
 
         try
         {
-            //repo.DeleteItem([.. toDelete.Select(f => f.Id)]);
+            repo.DeleteItem([.. toDelete.Select(f => f.Id)]);
         }
         catch
         {
