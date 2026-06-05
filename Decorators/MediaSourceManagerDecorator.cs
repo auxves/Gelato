@@ -320,6 +320,8 @@ public sealed class MediaSourceManagerDecorator(
         var manager = _manager.Value;
         var ctx = _http.HttpContext;
 
+        var cfg = GelatoPlugin.Instance!.GetConfig(Guid.Empty);
+
         var sources = GetStaticMediaSources(item, enablePathSubstitution, user);
 
         Guid? mediaSourceId =
@@ -389,7 +391,7 @@ public sealed class MediaSourceManagerDecorator(
 
         // Stub path after probing is done so the real URL is never sent to clients.
         // Force File protocol so clients proxy through Jellyfin instead of direct-playing.
-        if (ctx.GetActionName() == "GetPostedPlaybackInfo")
+        if (!cfg.ExposeUrl && ctx.GetActionName() is "GetPlaybackInfo" or "GetPostedPlaybackInfo")
         {
             selected.Path = "/stub";
             selected.IsRemote = false;
