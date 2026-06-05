@@ -57,6 +57,14 @@
             </div>
             
 
+            <div class="checkboxContainer checkboxContainer-withDescription">
+              <label>
+                <input is="emby-checkbox" type="checkbox" id="chkExposeUrl" />
+                <span>Expose Stream URL</span>
+              </label>
+              <div class="fieldDescription">Expose the stream URL to clients so they can direct play instead of routing through your Jellyfin instance.</div>
+            </div>
+
 
             <div class="checkboxContainer checkboxContainer-withDescription">
               <label>
@@ -292,6 +300,7 @@
 
         const txtStreamTTL = page.querySelector('#txtStreamTTL');
         const chkEnableMixed = page.querySelector('#chkEnableMixed');
+        const chkExposeUrl = page.querySelector('#chkExposeUrl');
         const chkExtendLocalSeriesTrees = page.querySelector('#chkExtendLocalSeriesTrees');
         const chkDisableSearch = page.querySelector('#chkDisableSearch');
         const chkFilterUnreleased = page.querySelector('#chkFilterUnreleased');
@@ -586,6 +595,7 @@
             if (txtSeriesPath) txtSeriesPath.value = cfg.SeriesPath || "";
             if (txtStreamTTL) txtStreamTTL.value = cfg.StreamTTL || 3600;
             if (chkEnableMixed) chkEnableMixed.checked = cfg.EnableMixed ?? true;
+            if (chkExposeUrl) chkExposeUrl.checked = cfg.ExposeUrl ?? false;
             if (chkExtendLocalSeriesTrees) chkExtendLocalSeriesTrees.checked = cfg.ExtendLocalSeriesTrees ?? false;
             if (chkDisableSearch) chkDisableSearch.checked = cfg.DisableSearch || false;
             if (chkFilterUnreleased) chkFilterUnreleased.checked = cfg.FilterUnreleased || false;
@@ -619,6 +629,7 @@
             // Stream TTL
             cfg.StreamTTL = parseInt(txtStreamTTL.value) || 3600;
             cfg.EnableMixed = chkEnableMixed.checked;
+            cfg.ExposeUrl = chkExposeUrl.checked;
             cfg.ExtendLocalSeriesTrees = chkExtendLocalSeriesTrees.checked;
 
             cfg.DisableSearch = chkDisableSearch.checked;
